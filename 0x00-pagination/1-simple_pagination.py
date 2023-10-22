@@ -44,10 +44,10 @@ class Server:
         assert (page > 0 and type(page) is int)
         assert (page_size > 0 and type(page_size is int))
 
-        tup_ind = index_range(page, page_size)
-
-        data_file = self.dataset()
         try:
+            tup_ind = index_range(page, page_size)
+            data_file = self.dataset()
+
             return data_file[tup_ind[0]:tup_ind[1]]
         except IndexError:
             return []
