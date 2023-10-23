@@ -52,10 +52,11 @@ class Server:
             index += 1
             data.append(dat_page)
 
+        nex_ind = index + page_size
+
         del_res = {
             "index": index,
-            "next index": index + page_size if ind_data[index + page_size]
-            else None,
+            "next index": nex_ind if ind_data[nex_ind] else None,
             "page_size": page_size,
             "data": data
         }
