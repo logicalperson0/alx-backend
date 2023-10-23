@@ -58,7 +58,7 @@ class Server:
             "index": index,
             "next index": nex_ind if ind_data[nex_ind] else None,
             "page_size": page_size,
-            "data": index
+            "data": data
         }
 
         return del_res
