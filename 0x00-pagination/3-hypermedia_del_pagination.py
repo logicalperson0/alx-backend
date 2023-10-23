@@ -54,7 +54,7 @@ class Server:
 
         del_res = {
             "index": index,
-            "next index": index,
+            "next index": index + 1,
             "page_size": page_size,
             "data": data
         }
