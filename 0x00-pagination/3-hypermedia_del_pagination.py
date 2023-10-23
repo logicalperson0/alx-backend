@@ -46,16 +46,17 @@ class Server:
 
         assert(index < len(ind_data))
         data = []
+        tempo = index
 
         for x in range(page_size):
             dat_page = ind_data[index]
             index += 1
             data.append(dat_page)
 
-        nex_ind = index + page_size + 1
+        nex_ind = index + page_size
 
         del_res = {
-            "index": index,
+            "index": tempo,
             "next index": nex_ind if ind_data[nex_ind] else None,
             "page_size": page_size,
             "data": data
