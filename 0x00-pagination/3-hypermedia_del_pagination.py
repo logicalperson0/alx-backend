@@ -52,7 +52,7 @@ class Server:
             index += 1
             data.append(dat_page)
 
-        nex_ind = index + page_size
+        nex_ind = index + page_size + 1
 
         del_res = {
             "index": index,
