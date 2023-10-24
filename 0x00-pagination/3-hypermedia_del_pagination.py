@@ -43,18 +43,16 @@ class Server:
         """return a dictionary with the following key-value pairs
         index, next_index, page_size, data are keys"""
         ind_data = self.indexed_dataset()
-
-        assert(index < len(ind_data))
+        lens = len(ind_data)
         data = []
+        assert index < lens
         tempo = index
-        nex_ind = tempo + page_size
+        nex_ind: int = tempo + page_size
 
         for x in range(page_size):
             dat_page = ind_data[index]
             index += 1
             data.append(dat_page)
-
-        
 
         del_res = {
             "index": tempo,
