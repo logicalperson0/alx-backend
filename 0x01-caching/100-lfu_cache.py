@@ -26,8 +26,8 @@ class LFUCache(BaseCaching):
 
             if key in self.listing:
                 self.listing.remove(key)
-     
-            #if len(item) > 1 and len(key) > 1:
+
+            # if len(item) > 1 and len(key) > 1:
             # del (self.cache_data[self.listing[-1]])
             # del (self.listing[-1])
 
