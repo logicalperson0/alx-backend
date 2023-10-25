@@ -20,21 +20,19 @@ class LFUCache(BaseCaching):
             pass
         else:
             if len(self.cache_data.keys()) >= self.MAX_ITEMS:
-                # print(listing[0])
                 print("DISCARD: {}".format(self.listing[0]))
                 del (self.cache_data[self.listing[0]])
                 del (self.listing[0])
 
             if key in self.listing:
                 self.listing.remove(key)
-            
-            if len(item) > 1 and len(key) > 1:
-                del (self.cache_data[self.listing[-1]])
-                del (self.listing[-1])
+     
+            #if len(item) > 1 and len(key) > 1:
+            # del (self.cache_data[self.listing[-1]])
+            # del (self.listing[-1])
 
             self.listing.append(key)
             self.cache_data[key] = item
-            # listing.append(self.cache_data[key])
 
     def get(self, key):
         """returns the value in self.cache_data linked to key"""
