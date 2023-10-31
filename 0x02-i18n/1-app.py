@@ -6,7 +6,7 @@ from flask import Flask, render_template
 from flask_babel import Babel
 
 
-class Config():
+class Config:
     """configure available languages in our app"""
     BABEL_DEFAULT_LOCALE = 'en'
     LANGUAGES = ["en", "fr"]
@@ -14,7 +14,7 @@ class Config():
 
 
 app = Flask(__name__)
-app.config = Config
+app.config.from_object(Config)
 babel = Babel(app)
 
 
