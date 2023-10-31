@@ -25,7 +25,7 @@ def get_locale():
     locale = request.args.get('locale')
     if locale in Config.LANGUAGES:
         return locale
-    return request.accept_languages.best_match(LANGUAGES)
+    return request.accept_languages.best_match(Config.LANGUAGES)
 
 
 users = {
