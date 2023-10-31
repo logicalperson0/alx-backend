@@ -2,7 +2,7 @@
 """
 a basic Flask app
 """
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, g
 from flask_babel import Babel
 
 
@@ -47,8 +47,8 @@ def get_user(user_id):
 def before_request():
     """use get_user to find a user if any, and set
     it as a global on flask.g.user."""
-    # g.users = get_user(request.args.get('login_as'))
-    setattr(g, 'user', get_user(request.args.get('login_as')))
+    g.users = get_user(request.args.get('login_as'))
+    # setattr(g, 'user', get_user(request.args.get('login_as')))
 
 
 @app.route("/")
