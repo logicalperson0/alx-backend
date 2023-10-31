@@ -41,7 +41,7 @@ def get_locale():
     if headers_lan in Config.LANGUAGES:
         return headers_lan
 
-    return request.accept_languages.best_match(LANGUAGES)
+    return request.accept_languages.best_match(Config.LANGUAGES)
 
 
 def get_user() -> Union[Dict, None]:
