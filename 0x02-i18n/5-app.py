@@ -42,7 +42,7 @@ def get_user():
     users_arr = {}
     if users_id is None:
         return None
-    
+
     users_arr[users_id] = users.get.(int(users_id))
     return users_arr[users_id]
 
