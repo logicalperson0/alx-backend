@@ -47,7 +47,7 @@ def get_user() -> Union[Dict, None]:
 
 
 @app.before_request
-def before_request():
+def before_request() -> None:
     """use get_user to find a user if any, and set
     it as a global on flask.g.user."""
     user_res = get_user()
