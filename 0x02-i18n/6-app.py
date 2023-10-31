@@ -3,7 +3,7 @@
 a basic Flask app
 """
 from flask import Flask, render_template, request, g
-from flask_babel import Babel
+from flask_babel import Babel, _
 from typing import Dict, Union
 
 
@@ -36,7 +36,7 @@ def get_locale():
     if g.user and g.user['locale'] in Config.LANGUAGES:
         return g.user['locale']
 
-    headers_lan = request.headers.get('locale', '')
+    headers_lan = request.headers.get('locale')
     if headers_lan in Config.LANGUAGES:
         return headers_lan
 
