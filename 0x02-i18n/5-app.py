@@ -35,26 +35,31 @@ users = {
 }
 
 
-def get_user(user_id):
+def get_user():
     """returns a user dictionary or None if the ID cannot be
     found or if login_as was not passed."""
-    if user_id:
-        return users.get(int(user_id))
-    return None
+    users_id = request.args.get('login_as', None)
+    users_arr = {}
+    if users_id is None:
+        return None
+    
+    users_arr[users_id] = users.get.(int(users_id))
+    return users_arr[users_id]
 
 
 @app.before_request
 def before_request():
     """use get_user to find a user if any, and set
     it as a global on flask.g.user."""
-    g.users = get_user(request.args.get('login_as'))
-    # setattr(g, 'user', get_user(request.args.get('login_as')))
+    user_res = get_user()
+    g.user = user_res
+    # g.user = get_user(request.args.get('login_as'))
 
 
 @app.route("/")
 def index():
     """renders an index.html template"""
-    return render_template('4-index.html')
+    return render_template('5-index.html')
 
 
 if __name__ == '__main__':
