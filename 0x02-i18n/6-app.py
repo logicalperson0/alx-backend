@@ -40,7 +40,7 @@ def get_locale():
     if headers_lan in Config.LANGUAGES:
         return headers_lan
 
-    return request.accept_languages.best_match(LANGUAGES)
+    return request.accept_languages.best_match(Config.LANGUAGES)
 
 
 def get_user() -> Union[Dict, None]:
@@ -65,7 +65,7 @@ def before_request() -> None:
 @app.route("/")
 def index():
     """renders an index.html template"""
-    return render_template('5-index.html')
+    return render_template('6-index.html')
 
 
 if __name__ == '__main__':
