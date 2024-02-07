@@ -36,9 +36,10 @@ app.get('/list_products', (req, res) => {
 app.get('/list_products/:itemId', async (req, res) => {
   const itemid = parseInt(req.params.itemId);
   const item = getItemById(itemid);
-  console.log(item);
+  //console.log(item.stock);
 
-  const curr = await getCurrentReservedStockById(itemid);
+  const currR = await getCurrentReservedStockById(itemid);
+  const curr = item.stock - currR;
 
   if(item) {
     item.currentQuantity = (curr) ? curr : 0;
@@ -56,14 +57,17 @@ app.get('/reserve_product/:itemId', async(req, res) => {
     res.status(404).json({"status":"Product not found"});
     return;
   }
-  const curr = await getCurrentReservedStockById(itemid);
+  const currR = await getCurrentReservedStockById(itemid);
+  const curr = item.stock - currR;
+  
   item.currentQuantity = (curr) ? curr : 0;
 
-  if ((item.stock - item.currentQuantity) < 1) {
+  if ((item.stock - currR) < 1) {
     res.status(403).json({ status: 'Not enough stock available', itemid });
     return;
   }
   reserveStockById(itemid, parseInt(curr) + 1);
+  //console.log(r);
   res.status(200).json({ status: 'Reservation confirmed', itemid});
 });
 
@@ -74,13 +78,15 @@ app.listen(port, () => {
 // redis==============================================================
 const Newclient = redis.createClient();
 const getAsync = promisify(Newclient.get).bind(Newclient);
+const setAsync = promisify(Newclient.set).bind(Newclient);
 
-const reserveStockById = async (itemId, stock) => {
-  Newclient.set(`item:${itemId}`, stock);
+const reserveStockById = (itemId, stock) => {
+  return setAsync(`item.${itemId}`, stock);
+  //console.log(r);
 };
 
-async function getCurrentReservedStockById(itemId) {
-  const stk = await getAsync(itemId);
+const getCurrentReservedStockById = async (itemId) => {
+  const stk = await getAsync(`item.${itemId}`);
   return stk;
 };
 
